@@ -32,7 +32,7 @@ function verifyJWT(req, res, next){
 }
 
 
-// const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.xwe6b.mongodb.net/?retryWrites=true&w=majority`;
+
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.i5guk.mongodb.net/?retryWrites=true&w=majority`;
 console.log(uri);
 
@@ -62,12 +62,6 @@ async function run(){
       return res.status(403).send({message: 'Forbidden access'})
     }
   }
-
-
-  
-
-    //
-
 
 
     // =====get method====
@@ -136,11 +130,6 @@ async function run(){
       const result = await orderCollection.insertOne(product);
       res.send(result);
     })
-
-
-
-
-    //
     
 
 
@@ -234,8 +223,6 @@ async function run(){
       const token = jwt.sign({ email: email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
       res.send({result, token})
     })
-
-    //
 
 
   }finally{
