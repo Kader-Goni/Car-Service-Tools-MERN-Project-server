@@ -134,6 +134,22 @@ async function run(){
 
 
 
+    // ===== Delete method ======
+    app.delete('/product/:id',  async (req, res) => {
+      const id = req.params.id;
+      const query = {_id: objectId(id)}
+      console.log(query)
+      const result = await productCollection.deleteOne(query);
+      res.send(result);
+    })
+
+    app.delete('/myOrder/:id',  async (req, res) => {
+      const id = req.params.id;
+      const query = {_id: objectId(id)}
+      console.log(query)
+      const result = await orderCollection.deleteOne(query);
+      res.send(result);
+    })
 
 
 
@@ -170,7 +186,7 @@ async function run(){
       const token = jwt.sign({ email: email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
       res.send({result, token})
     })
-    
+
     //
 
 
