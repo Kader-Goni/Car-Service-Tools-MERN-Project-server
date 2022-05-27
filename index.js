@@ -134,6 +134,27 @@ async function run(){
 
 
 
+    // ===== patch method ======
+  
+    app.patch('/order/:id', async (req, res) => {
+      const id = req.params.id;
+      const payment = req.body;
+      const filter = {_id: ObjectID(id)};
+      const updateDoc = {
+        $set: {
+          paid: true,
+          status: 'pending',
+          transactionId: payment.transactionId,
+        }
+      }
+      const result = await paymentCollection.insertOne(payment);
+      const updateOrder = await orderCollection.updateOne(filter, updateDoc);
+      res.send(updateDoc, result, updateOrder); 
+    })
+
+
+
+
     // ===== Delete method ======
     app.delete('/product/:id',  async (req, res) => {
       const id = req.params.id;
