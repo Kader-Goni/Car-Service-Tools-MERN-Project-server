@@ -51,6 +51,18 @@ async function run(){
 
     // jwt
 
+    //  ======= middleware verify Admin ========
+    const verifyAdmin = async (req, res, next) => {
+    const requester = req.decoded.email;
+    const requesterAccount = await userCollection.findOne({email: requester});
+    // console.log(requesterAccount);
+    if(requesterAccount.role === "admin"){
+      next();
+    }else{
+      return res.status(403).send({message: 'Forbidden access'})
+    }
+  }
+
 
   
 
